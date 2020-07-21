@@ -43,6 +43,8 @@ spec:
 {{ include "kubernetes.sources.envs" (dict "Context" $ctx "Type" "traces")}}
         resources:
           {{- toYaml .Values.otelcol.deployment.resources | nindent 10 }}
+        securityContext:
+          {{ toYaml .Values.otelcol.securityContext | indent 10 }}
         ports:
         - containerPort: 5778  # Default endpoint for Jaeger Sampling.
         - containerPort: 6831  # Default endpoint for Jaeger Thrift Compact receiver.
